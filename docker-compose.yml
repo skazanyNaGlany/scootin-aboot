@@ -1,0 +1,45 @@
+version: "2"
+
+services:
+  api:
+    build: .
+    hostname: api
+    environment:
+      - STATIC_API_KEY=e47d3d1d-bc07-4aae-ac9d-30557d705bb8
+    volumes:
+      - .:/var/www
+    ports:
+      - "127.0.0.1:8080:80"
+      - "127.0.0.1:8443:443"
+    stdin_open: true
+    tty: true
+
+  db:
+    image: postgres:16.4
+    hostname: db
+    environment:
+      - LANG=C.UTF-8
+      - LC_ALL=C.UTF-8
+      - LC_CTYPE=C.UTF-8
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    stdin_open: true
+    tty: true
+
+  dbadmin:
+    image: dpage/pgadmin4:2024-09-20-1
+    hostname: dbadmin
+    volumes:
+      - ./servers.json:/pgadmin4/servers.json
+    environment:
+      - LANG=C.UTF-8
+      - LC_ALL=C.UTF-8
+      - LC_CTYPE=C.UTF-8
+      - PGADMIN_DEFAULT_EMAIL=postgres@localhost.com
+      - PGADMIN_DEFAULT_PASSWORD=123
+      - PGADMIN_DISABLE_POSTFIX=True
+      - PGADMIN_CONFIG_SERVER_MODE=False
+      - PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED=False
+    ports:
+      - "127.0.0.1:8888:80"
+    stdin_open: true
+    tty: true
