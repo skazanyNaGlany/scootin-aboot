@@ -21,7 +21,7 @@ API intended for scooter event collecting and reporting to users.
 
 The API will expose a few REST-like endpoints to manage scooters and their timeline:
 
-- `GET /scooters` - to get list of available scooters, also by the status and the coordinates (free, occupied)
+- `GET /scooters` - to get list of available scooters, also by the status (free, occupied) and the coordinates
 - `POST /scooters` - to create a scooter
 - `PATCH /scooters/{id}` - to edit a scooter
 - `POST /users` - to create an user
